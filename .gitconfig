@@ -1,0 +1,111 @@
+[alias]
+	co = checkout
+	logs = log --stat -w --abbrev-commit --decorate=full
+	logss = log --stat -w --decorate=full
+	logsp = log --stat -w --decorate=full -p
+	mylogs = log --stat -w --abbrev-commit --decorate=full '--author=ebrown|ebrown3|Eric.*Brown'
+	mylogsp = log --stat -w --decorate=full -p '--author=ebrown|ebrown3|Eric.*Brown'
+	le = log --stat -w --decorate=full --author=ebrown
+	lep = log --stat -w --decorate=full --author=ebrown -p
+	logsdiff = log --stat -w --decorate=full -p
+#	logo = log '--pretty=format:%h %ci %cn %s'
+#	logo = log '--pretty=format:%Cblue%h%Creset %ci %Cgreen%cn%Creset %s'
+	logo = log --date=short '--pretty=format:%C(yellow)%h%Creset %ad %Cgreen%cn%Creset %s%Cred %d%Creset'
+	logon = log --no-merges --date=short '--pretty=format:%C(yellow)%h%Creset %ad %Cgreen%<(10,trunc)%cn%Creset %<(100,trunc)%s%Creset'
+	logo2 = log --date=short '--pretty=format:%C(yellow)%h%Creset %ad %Cgreen%<(10,trunc)%cn%Creset %w(100,0,30)%s%Cred %d%Creset'
+	logo3 = log --date=short '--pretty=format:%C(yellow)%h%Creset %ad %Cgreen%<(10,trunc)%cn%Creset %<(80,trunc)%s%Cred %d%Creset'
+	logo4 = log --date=short '--pretty=format:%C(yellow)%h%Creset %ad %Cgreen%<(10,trunc)%cn%Creset %<(80,trunc)%s%n                             %Cred%d%Creset'
+	clog = log --date=short '--pretty=format:|%D|%an|%B'
+	mylogo = log '--author=ebrown|ebrown3|Eric.*Brown' --date=short '--pretty=format:%C(yellow)%h %Cgreen%ad%Creset %s%Cred %d%Creset'
+	logg = log --graph --date=short '--pretty=format:%C(yellow)%h%Creset %ad %Cgreen%an%Creset %s%Cred %d%Creset'
+	logh = log --date=short '--pretty=format:%C(yellow)%h%Creset %ad %Cgreen%an%Creset %s%Cred %d%Creset' -20
+	loghn = log --no-merges --date=short '--pretty=format:%C(yellow)%h%Creset %ad %Cgreen%<(10,trunc)%cn%Creset %<(100,trunc)%s%Creset' -20
+	mylogh = log '--author=ebrown|ebrown3|Eric.*Brown' --date=short '--pretty=format:%C(yellow)%h %Cgreen%ad%Creset %s%Cred %d%Creset' -20
+	myloghn = log --no-merges '--author=ebrown|ebrown3|Eric Brown' --date=short '--pretty=format:%C(yellow)%h%Cblue %ad %Creset%s%Cred %d%Creset' -20
+	sl = stash list '--pretty=format:%C(yellow)%h%Creset %ai %Cblue%gd%Creset %s%Cred %d%Creset' -20
+	sls = stash list '--pretty=format:%C(yellow)%h%Creset %ai %Cblue%gd%Creset %s%Cred %d%Creset' --stat -w --decorate=full
+	slp = stash list '--pretty=format:%C(yellow)%h%Creset %ai %Cblue%gd%Creset %s%Cred %d%Creset' --stat -w --decorate=full -p
+#	sshow = "!f() { git stash show stash^{/$*} -p; }; f"
+#	sshow = !sh -c 'git stash show stash^{/$*} -p'
+#	sshow = !sh -c 'git stash show stash^{/$*} -p'
+	sa = stash apply -q
+	logsh = !(git svn log --oneline -250 | awk '{print $1}' > /tmp/logsh.$$ && git logh -250 | paste /tmp/logsh.$$ - && rm -f /tmp/logsh.$$)
+# Very hard to get this right inside git:
+#	logsh3 = !(git logh | eval "sed $(git svn log --show-commit --oneline --limit=25 | awk '{printf "-e \"s/"$3"/"$1" "$3"/g\" "}')" | sed -e 's/([^ 0-9a-f])([0-9a-f]{6,})/\1------ \2/g')
+        lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+        shows = show --stat -w
+	tagl = tag -ln
+	slo2 = svn log --oneline --show-commit
+	slo = !git log '--pretty=format:%h %ci %cn %s %n%b' | awk '/^[0-9a-f]{7} / {if (z) {print \"      \"z}} {z=$0} /git-svn-id/ {split(substr($0, index($0, \"@\")+1),a)}{printf \"%5s %s\\n\",a[1],z}{z=\"\"}'
+	ri = rebase -i
+	rc = rebase --continue
+	ci = commit -v -uno
+	cia = commit -va -uno
+	ca = commit --amend -v
+	caa = commit --amend -va -uno
+	cav = commit -av
+	dc = svn dcommit
+	sr = svn rebase
+	cp = cherry-pick -x
+	st = status -uno
+	s = status -uno -s
+	ss = status -s
+	ne = notes edit
+	sts = status -uno -s
+	dcommit = svn dcommit
+	brav = branch -a -vv
+	brv = branch -vv
+	# Show branches ordered by most frequently worked on
+	myb = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(color:blue)%(align:left,30)%(refname:short)%(end) %(color:yellow)%(objectname:short)%(color:reset) %(contents:subject)'
+	# List all branches a commit is on
+	bc = branch --contains
+	undo = reset --soft HEAD^
+	revert = checkout
+	diffw = diff --color-words -w
+	diffww = diff --color-words -w --word-diff-regex=.
+	p4diff = difftool --tool=p4merge --no-prompt
+	ediff = difftool --tool=ediff --no-prompt
+	opendiff = difftool --tool=opendiff --no-prompt
+	opendiffw = difftool --tool=opendiff --no-prompt -w
+	p4merge = mergetool --tool=p4merge
+	diffmerge = difftool --tool=diffmerge --no-prompt
+	p4show = "!f() { git p4diff $1^ $1; }; f"
+	openshow = "!f() { git opendiff $1^ $1; }; f"
+	wf = rebase --whitespace=fix
+# Merge aliasses - must specify filename
+	comine = checkout --ours --
+	coorig = checkout HEAD --
+	pullm = pull --stat --rebase origin master
+	pushm = push origin master
+	pushu = push -u
+	pullt = pull -Xtheirs
+	rblame = !sh -c 'while line=$(git blame "$@" $commit 2>/dev/null); do commit=${line:0:8}^; [ 00000000^ == $commit ] && commit=$(git rev-parse HEAD); echo $line; done' dumb_param
+	origin-url = config --get remote.origin.url
+	fa = fetch --all
+	fap = !git fetch --all && git pull
+
+	lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+	lg = !"git lg1"
+
+	dem = !git branch -D $(git branch --list 'ebrown/*' --merged)
+	rprune = remote prune origin
+
+[user]
+	name = Eric Brown
+	email = ericbrown@khanacademy.org
+#	email = yogieric@gmail.com
+[apply]
+	whitespace = nowarn
+[push]
+	default = simple
+[core]
+	autocrlf = input
+	excludesfile = /Users/ebrown/.gitignore
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[kaclone]
+	email = ericbrown@khanacademy.org
