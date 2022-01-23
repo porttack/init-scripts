@@ -1,10 +1,10 @@
 # Load my environment too (in case bashrc does not)
 [ -f ~/.bash_env ] && . ~/.bash_env
 
-alias ls="ls -G"
+alias ls="ls -G --color=auto"
 #alias ls="ls -F ${LSARGS}"
-alias l='ls -AF'
-alias ll='ls -alh'
+alias l='ls -AF --color=auto'
+alias ll='ls -alh --color=auto'
 alias lt='ls -alht'
 alias tree='tree -FC'
 alias md='mkdir -p'
@@ -19,7 +19,9 @@ alias sdr='screen -dR'
 alias sdrz='screen -dR -e^Z^Z'
 alias sx='screen -x'
 alias sxz='screen -x -e^Z^Z'
-alias grep='grep --color=auto'
+alias grep='grep --color=auto -n'
+alias p2='python2'
+alias p3='python3'
 
 alias k=kubectl
 #alias kc='kubectl config get-contexts -o name'

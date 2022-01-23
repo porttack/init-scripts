@@ -107,5 +107,9 @@
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+[grep]
+	lineNumber = true
+	patternType = perl
+	
 [kaclone]
 	email = ericbrown@khanacademy.org
