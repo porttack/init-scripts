@@ -1,8 +1,8 @@
 shopt -s histappend cmdhist cdspell nocaseglob
 export ORIG_PATH=${PATH}
 export PATH=~/bin:/usr/local/sbin:/usr/local/bin:${PATH}:/usr/sbin:/sbin
-export HISTSIZE=8000
-export HISTFILESIZE=5000
+export HISTSIZE=10000
+export HISTFILESIZE=20000
 export HISTFILE=~/.bash_history${WINDOW:+.screen_$WINDOW}
 export HISTCONTROL=erasedups
 export HISTTIMEFORMAT="%F %T  "
@@ -18,3 +18,9 @@ export GLOBIGNORE=".git:.svn:CVS:.DS_Store"  # glob ignore
 export FIGNORE=".git:.svn:CVS:.DS_Store"     # pathname completion ignore
 export LESS="-R -# 32 -X -b50 -i -w"
 LESS+=" -P?f%f:stdin. ?m(%i of %m) .?ltlines %lt-%lb?L/%L. :byte %bB?s/%s. .?ccolumn %c .?e(END) ?x- Next\\: %x.:?pB%pB\\%..%t"
+
+# Powerline (from https://powerline.readthedocs.io/en/master/usage/shell-prompts.html)
+if which powerline-daemon > /dev/null; then powerline-daemon -q; fi
+POWERLINE_BASH_CONTINUATION=1
+POWERLINE_BASH_SELECT=1
+[[ -e /usr/share/powerline/integrations/powerline.sh ]] && . /usr/share/powerline/integrations/powerline.sh

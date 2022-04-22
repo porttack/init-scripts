@@ -1,11 +1,16 @@
 # Load my environment too (in case bashrc does not)
-[ -f ~/.bash_env ] && . ~/.bash_env
+if [[ -f ~/.bash_env ]]; then
+    . ~/.bash_env
+elif [[ -f ~/dotfiles/.bash_env ]]; then
+    . ~/dotfiles/.bash_env
+fi
 
 alias ls="ls -G --color=auto"
-#alias ls="ls -F ${LSARGS}"
+alias ls='ls -F --color=auto'
 alias l='ls -AF --color=auto'
 alias ll='ls -alh --color=auto'
 alias lt='ls -alht'
+alias df='df -haT'
 alias tree='tree -FC'
 alias md='mkdir -p'
 alias digs='dig +short'
@@ -29,6 +34,7 @@ alias kc='kubectl config get-contexts'
 alias kc-rename='kubectl config rename-context'
 alias kcu='kubectl config use-context'
 alias kcn='kubectl config set-context --current --namespace'
+alias kcd='kubectl config delete-context'
 alias kg='kubectl get'
 alias kn='kubectl get namespaces'
 alias kw='kubectl get -o wide'
@@ -46,6 +52,8 @@ alias gi='gcloud beta compute instances'
 
 alias s=skaffold
 alias sd='skaffold dev --port-forward'
+
+alias t=terraform
 
 # Simple list of ips (linux)
 myips () { ifconfig|grep -B1 "inet"|awk '{ if ( $1 == "inet" ) { printf "%s %s\n",substr($2,index($2,":")+1),name } else if ( $2 == "Link" ) { name=$1 } }'|grep -v 127.0.0.1; }
