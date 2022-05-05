@@ -18,6 +18,10 @@ export GLOBIGNORE=".git:.svn:CVS:.DS_Store"  # glob ignore
 export FIGNORE=".git:.svn:CVS:.DS_Store"     # pathname completion ignore
 export LESS="-R -# 32 -X -b50 -i -w"
 LESS+=" -P?f%f:stdin. ?m(%i of %m) .?ltlines %lt-%lb?L/%L. :byte %bB?s/%s. .?ccolumn %c .?e(END) ?x- Next\\: %x.:?pB%pB\\%..%t"
+export PATH="$HOME/dotfiles/bin:$PATH"
+
+# Khan customizations
+#export DO_NOT_ACTIVATE_VIRTUALENV_KHAN27=1
 
 # Powerline (from https://powerline.readthedocs.io/en/master/usage/shell-prompts.html)
 if which powerline-daemon > /dev/null; then powerline-daemon -q; fi
